@@ -102,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\main.js" />
+    <Content Include="lib\angular-jaydata-table\index.js" />
+    <Content Include="lib\angular-jaydata-table\table.html" />
     <Content Include="packages.config" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
