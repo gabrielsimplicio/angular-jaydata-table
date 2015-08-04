@@ -5,7 +5,6 @@
 
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/q/q.js"></script>
 
     <script src="lib/olingo-odata4-js/odatajs-4.0.0.min.js"></script>
     <script src="lib/jaydata/jaydata.min.js"></script>
@@ -17,6 +16,8 @@
     <script src="app/main.js"></script>
 </head>
 <body ng-controller="jayTableSample">
-    <jay-table list="list" options="options"></jay-table>
+    <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
+
+    <pre>{{ selectedItems | json }}</pre>
 </body>
 </html>

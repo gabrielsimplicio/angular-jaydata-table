@@ -6,7 +6,8 @@
 .controller("jayTableSample", function ($scope, $data, jayTableOptions) {
     
     $scope.list = [];
-    
+    $scope.selectedItems = [];
+
     $data
         .initService("http://localhost:54273/odata")
         .then(function (odataContext) {
@@ -24,11 +25,13 @@
             console.log(error);
         });
     
-    jayTableOptions
+    var a = jayTableOptions
         .initializeHeader()
         .addColumn("Name").withTitle("Name")
         .addColumn("DateOfBirth").withTitle("Date Of Birth")
         .addColumn("Phone").withTitle("Phone");
+
+    console.log(a);
 
     $scope.options = jayTableOptions;
 
