@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -104,8 +105,11 @@
     <Content Include="app\main.js" />
     <Content Include="lib\angular-jaydata-table\index.js" />
     <Content Include="lib\angular-jaydata-table\table.html" />
+    <Content Include="lib\jaydata\angular.min.js" />
+    <Content Include="lib\jaydata\jaydata.min.js" />
+    <Content Include="lib\jaydata\oDataProvider.min.js" />
+    <Content Include="lib\olingo-odata4-js\odatajs-4.0.0.min.js" />
     <Content Include="packages.config" />
-    <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">

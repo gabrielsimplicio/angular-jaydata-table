@@ -1,12 +1,7 @@
-﻿using System;
+﻿using angular_jaydata_table_demo.Model;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using angular_jaydata_table_demo.Model;
-using Microsoft.Data.OData;
 using System.Web.OData;
 
 namespace angular_jaydata_table_demo.Controllers

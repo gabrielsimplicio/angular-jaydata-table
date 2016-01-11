@@ -25,14 +25,12 @@
             console.log(error);
         });
     
-    var a = jayTableOptions
+    jayTableOptions
         .initializeHeader()
         .addColumn("Name").withTitle("Name")
         .addColumn("DateOfBirth").withTitle("Date Of Birth")
         .addColumn("Phone").withTitle("Phone");
-
-    console.log(a);
-
+    
     $scope.options = jayTableOptions;
 
 })
