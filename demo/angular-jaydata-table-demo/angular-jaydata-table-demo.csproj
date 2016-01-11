@@ -105,7 +105,6 @@
     <Content Include="app\main.js" />
     <Content Include="lib\angular-jaydata-table\index.js" />
     <Content Include="lib\angular-jaydata-table\table.html" />
-    <Content Include="lib\jaydata\jaydata.min.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
     <Content Include="README.md" />
