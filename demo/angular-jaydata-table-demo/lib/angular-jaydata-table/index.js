@@ -15,7 +15,7 @@
                     list: "=",
                     options: "=",
                     selectedItems: "=",
-                    withoutCheckbox: "@"
+                    withoutCheckboxes: "@"
                 },
                 controller: function ($scope, $element, $attrs) {
 
@@ -26,12 +26,14 @@
                         $scope.tableOptions = $scope.options.getTableHeader();
                     }
                     
-                    $scope.withoutCheckbox = angular.isDefined($scope.withoutCheckbox);
+                    $scope.withoutCheckboxes = angular.isDefined($scope.withoutCheckboxes);
 
                     if ($scope.list) {
                         $scope.$watch("list", function (data) {
+                            console.log("IJ");
                             $scope.allSelected = false;
-                            var selected = [];
+                            $scope.selectedItems = [];
+                            selected = [];
 
                             if (data.length > 0) {
 
@@ -69,8 +71,8 @@
                         $scope.selectedItems = selected;
                     }
 
-                    $scope.toggleSelected = function (item, event, withoutCheckbox) {
-                        if (!withoutCheckbox) {
+                    $scope.toggleSelected = function (item, event, withoutCheckboxes) {
+                        if (!withoutCheckboxes) {
                             $scope.allSelected = false;
 
                             event.stopPropagation();
@@ -227,7 +229,7 @@
                             '</tr>' +
                         '</thead>',
                 link: function ($scope, $element, $attrs) {
-                    $scope.noCheckBox = $scope.withoutCheckbox;
+                    $scope.noCheckBox = $scope.withoutCheckboxes;
 
                     $scope.default = $attrs.default;
                     if (!$scope.default) {
@@ -256,10 +258,10 @@
                                     '{{ processColumn(item, option) }}' +
                                 '</td>' +
                             '</tr>' +
-                            '<tr ng-if="!default" ng-repeat="item in items" ng-click="toggleSelected(item, $event, withoutCheckbox)" style="cursor: pointer" ng-style="{ \'background-color\': (!noCheckBox ? (item.IsSelected ? \'#fbebbc\': \'\') : \'\') }" script-transclude></tr>' +
+                            '<tr ng-if="!default" ng-repeat="item in items" ng-click="toggleSelected(item, $event, withoutCheckboxes)" style="cursor: pointer" ng-style="{ \'background-color\': (!noCheckBox ? (item.IsSelected ? \'#fbebbc\': \'\') : \'\') }" script-transclude></tr>' +
                         '</tbody>',
                 link: function ($scope, $element, $attrs) {
-                    $scope.noCheckBox = $scope.withoutCheckbox;
+                    $scope.noCheckBox = $scope.withoutCheckboxes;
                 }
             }
         })
