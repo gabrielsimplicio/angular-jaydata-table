@@ -1,7 +1,7 @@
 (function () {
 
     angular
-        .module("jaydata-table", ['jaydata'])
+        .module("angular-jaydata-table", ['jaydata'])
 
         .directive("jayTable", function ($filter, $templateRequest, $compile) {
 

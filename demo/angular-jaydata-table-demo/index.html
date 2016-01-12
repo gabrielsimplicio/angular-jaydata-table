@@ -1,25 +1,11 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="demoApp">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="jayDataDemoApp">
 <head>
     <title>Angular Jaydata Table Demo</title>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script src="lib/olingo-odata4-js/odatajs-4.0.0.min.js"></script>
-    <script src="lib/jaydata/jaydata.min.js"></script>
-    <script src="lib/jaydata/oDataProvider.min.js"></script>
-    <script src="lib/jaydata/angular.min.js"></script>
-
-    <script src="lib/angular-jaydata-table/index.js"></script>
-
-    <script src="app/main.js"></script>
 </head>
-<body ng-controller="jayTableSample">
-
+<body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,18 +23,22 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Basic</a></li>
+        <li role="presentation" class="active"><a href="#default" aria-controls="default" role="tab" data-toggle="tab">Default</a></li>
         <li role="presentation"><a href="#without-checkboxes" aria-controls="without-checkboxes" role="tab" data-toggle="tab">Without Checkboxes</a></li>
         <li role="presentation"><a href="#pagination" aria-controls="pagination" role="tab" data-toggle="tab">Pagination</a></li>
         <li role="presentation"><a href="#custom-header" aria-controls="custom-header" role="tab" data-toggle="tab">Custom Header/Body</a></li>
         <li role="presentation"><a href="#relationship" aria-controls="relationship" role="tab" data-toggle="tab">Relationship</a></li>
+        <li role="presentation"><a href="#concat-html" aria-controls="concat-html" role="tab" data-toggle="tab">Concat columns via HTML</a></li>
+        <li role="presentation"><a href="#concat-js" aria-controls="concat-js" role="tab" data-toggle="tab">Concat columns via JS</a></li>
+        <li role="presentation"><a href="#colspan" aria-controls="colspan" role="tab" data-toggle="tab">Colspan</a></li>
+        <li role="presentation"><a href="#format" aria-controls="format" role="tab" data-toggle="tab">Format</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
 
-        <!-- Basic -->
-        <div role="tabpanel" class="tab-pane active" id="basic" style="padding-top: 10px;">
+        <!-- Default -->
+        <div role="tabpanel" class="tab-pane active" id="default" style="padding-top: 10px;" ng-controller="BasicController">
             <div class="col-md-6">
                 <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
             </div>
@@ -63,7 +53,29 @@
                         <pre style="height: 250px"><code>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="js01">
-                        <pre style="height: 250px"><code>js code</code></pre>
+                        <pre style="height: 250px"><code>$scope.list = [];
+$scope.selectedItems = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext
+            .Person
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    });
+
+jayTableOptions
+    .initializeHeader()
+    .addColumn("Name")
+    .addColumn("DateOfBirth").withTitle("Date Of Birth")
+    .addColumn("Phone")
+
+$scope.options = jayTableOptions;</code></pre>
                     </div>
                 </div>
 
@@ -73,39 +85,158 @@
         </div>
 
         <!-- Without Checkboxes -->
-        <div role="tabpanel" class="tab-pane" id="without-checkboxes" style="padding-top: 10px;">
+        <div role="tabpanel" class="tab-pane" id="without-checkboxes" style="padding-top: 10px;" ng-controller="BasicController">
             <div class="col-md-6">
                 <jay-table list="list" options="options" without-checkboxes></jay-table>
             </div>
             <div class="col-md-6">
-                CODE:
-                <pre><code>&lt;jay-table list="list" options="options" without-checkboxes&gt;&lt;/jay-table&gt;</code></pre>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html02" aria-controls="html02" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js02" aria-controls="js02" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html02">
+                        <pre style="height: 250px"><code>&lt;jay-table list="list" options="options" without-checkboxes&gt;&lt;/jay-table&gt;</code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="js02">
+                        <pre style="height: 250px"><code>jayTableOptions
+    .initializeHeader()
+    .addColumn("Name")
+    .addColumn("DateOfBirth").withTitle("Date Of Birth")
+    .addColumn("Phone")</code></pre>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Pagination -->
-        <div role="tabpanel" class="tab-pane" id="pagination" style="padding-top: 10px;">
+        <div role="tabpanel" class="tab-pane" id="pagination" style="padding-top: 10px;" ng-controller="PaginationController">
             <div class="col-md-6">
-                <jay-table-pagination list="list2"></jay-table-pagination>
-                <jay-table list="list2" options="options" selected-items="selectedItems2"></jay-table>
+                <jay-table-pagination list="list"></jay-table-pagination>
+                <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
             </div>
             <div class="col-md-6">
-                CODE:
-                <pre><code>&lt;jay-table-pagination list="list"&gt;&lt;/jay-table-pagination&gt;<br/><br/>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html03" aria-controls="html03" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js03" aria-controls="js03" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html03">
+
+                        <pre style="height: 250px"><code>&lt;jay-table-pagination list="list"&gt;&lt;/jay-table-pagination&gt;
+
+&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="js03">
+                        <pre style="height: 250px"><code>jayTableOptions
+    .initializeHeader()
+    .addColumn("Name")
+    .addColumn("DateOfBirth").withTitle("Date Of Birth")
+    .addColumn("Phone")</code></pre>
+                    </div>
+                </div>
                 Selected items:<br />
-                <pre style="height: 350px">{{ selectedItems2 | json }}</pre>
+                <pre style="height: 250px">{{ selectedItems | json }}</pre>
             </div>
         </div>
 
         <!-- Custom Header/Body -->
-        <div role="tabpanel" class="tab-pane" id="custom-header" style="padding-top: 10px;">
-            Custom Header/Body
+        <div role="tabpanel" class="tab-pane" id="custom-header" style="padding-top: 10px;" ng-controller="CustomHeaderBodyController">
+            <div class="col-md-6">
+                <jay-table list="list" selected-items="selectedItems">
+                    <jay-table-head>
+                        <script type="text/html">
+                            <th>Name</th>
+                            <th>Date Of Birth</th>
+                        </script>
+                    </jay-table-head>
+                    <jay-table-body>
+                        <script type="text/html">
+                            <td>{{item.Name}}</td>
+                            <td>{{item.DateOfBirth}}</td>
+                        </script>
+                    </jay-table-body>
+                </jay-table>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html04" aria-controls="html04" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js04" aria-controls="js04" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html04">
+                        <pre style="height: 250px"><code ng-non-bindable>&lt;jay-table list="list" selected-items="selectedItems"&gt;
+    &lt;jay-table-head&gt;
+        &lt;script type="text/html"&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Date Of Birth&lt;/th&gt;
+        &lt;/script&gt;
+    &lt;/jay-table-head&gt;
+    &lt;jay-table-body&gt;
+        &lt;script type="text/html"&gt;
+            &lt;td&gt;{{item.Nome}}&lt;/td&gt;
+            &lt;td&gt;{{item.DateOfBirth}}&lt;/td&gt;
+        &lt;/script&gt;
+    &lt;/jay-table-body&gt;
+&lt;/jay-table&gt;</code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="js04">
+                        <pre style="height: 250px"><code></code></pre>
+                    </div>
+                </div>
+                Selected items:<br />
+                <pre style="height: 250px">{{ selectedItems | json }}</pre>
+            </div>
+        </div>
+
+        <!-- Relationship -->
+        <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
+            RelationShip
         </div>
 
         <!-- RelationShip -->
         <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
             RelationShip
         </div>
+
+        <!-- Concat columns via HTML -->
+        <div role="tabpanel" class="tab-pane" id="concat-html" style="padding-top: 10px;">
+            Concat columns via HTML
+        </div>
+
+        <!-- Concat columns via JS -->
+        <div role="tabpanel" class="tab-pane" id="concat-js" style="padding-top: 10px;">
+            Concat columns via JS
+        </div>
+
+        <!-- Colspan -->
+        <div role="tabpanel" class="tab-pane" id="colspan" style="padding-top: 10px;">
+            Colspan
+        </div>
+
+        <!-- Format -->
+        <div role="tabpanel" class="tab-pane" id="format" style="padding-top: 10px;">
+            Format
+        </div>
     </div>
+    
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="lib/olingo-odata4-js/odatajs-4.0.0.min.js"></script>
+    <script src="lib/jaydata/jaydata.min.js"></script>
+    <script src="lib/jaydata/oDataProvider.min.js"></script>
+    <script src="lib/jaydata/angular.min.js"></script>
+
+    <script src="lib/angular-jaydata-table/index.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/BasicController.js"></script>
+    <script src="app/PaginationController.js"></script>
+    <script src="app/CustomHeaderBodyController.js"></script>
 </body>
 </html>

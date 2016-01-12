@@ -102,7 +102,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\main.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\BasicController.js" />
+    <Content Include="app\CustomHeaderBodyController.js" />
+    <Content Include="app\PaginationController.js" />
     <Content Include="lib\angular-jaydata-table\index.js" />
     <Content Include="lib\angular-jaydata-table\table.html" />
     <Content Include="lib\jaydata\angular.min.js" />
@@ -112,6 +115,7 @@
     <Content Include="packages.config" />
     <Content Include="bower.json" />
     <Content Include="README.md" />
+    <Content Include="package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
