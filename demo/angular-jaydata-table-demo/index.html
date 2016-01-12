@@ -46,54 +46,64 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="basic">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
+
+        <!-- Basic -->
+        <div role="tabpanel" class="tab-pane active" id="basic" style="padding-top: 10px;">
+            <div class="col-md-6">
+                <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html01" aria-controls="html01" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js01" aria-controls="js01" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html01">
+                        <pre style="height: 250px"><code>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
                     </div>
-                    <div class="col-md-6">
-                        CODE:
-                        <pre><code>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
-                        Selected items:<br />
-                        <pre style="height: 350px">{{ selectedItems | json }}</pre>
+                    <div role="tabpanel" class="tab-pane" id="js01">
+                        <pre style="height: 250px"><code>js code</code></pre>
                     </div>
                 </div>
+
+                Selected items:<br />
+                <pre style="height: 250px">{{ selectedItems | json }}</pre>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="without-checkboxes">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <jay-table list="list" options="options" without-checkboxes></jay-table>
-                    </div>
-                    <div class="col-md-6">
-                        CODE:
-                        <pre><code>&lt;jay-table list="list" options="options" without-checkboxes&gt;&lt;/jay-table&gt;</code></pre>
-                    </div>
-                </div>
+
+        <!-- Without Checkboxes -->
+        <div role="tabpanel" class="tab-pane" id="without-checkboxes" style="padding-top: 10px;">
+            <div class="col-md-6">
+                <jay-table list="list" options="options" without-checkboxes></jay-table>
+            </div>
+            <div class="col-md-6">
+                CODE:
+                <pre><code>&lt;jay-table list="list" options="options" without-checkboxes&gt;&lt;/jay-table&gt;</code></pre>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="pagination">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <jay-table-pagination list="list2"></jay-table-pagination>
-                        <jay-table list="list2" options="options" selected-items="selectedItems2"></jay-table>
-                    </div>
-                    <div class="col-md-6">
-                        CODE:
-                        <pre><code>&lt;jay-table-pagination list="list"&gt;&lt;/jay-table-pagination&gt;<br/><br/>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
-                        Selected items:<br />
-                        <pre style="height: 350px">{{ selectedItems2 | json }}</pre>
-                    </div>
-                </div>
+
+        <!-- Pagination -->
+        <div role="tabpanel" class="tab-pane" id="pagination" style="padding-top: 10px;">
+            <div class="col-md-6">
+                <jay-table-pagination list="list2"></jay-table-pagination>
+                <jay-table list="list2" options="options" selected-items="selectedItems2"></jay-table>
+            </div>
+            <div class="col-md-6">
+                CODE:
+                <pre><code>&lt;jay-table-pagination list="list"&gt;&lt;/jay-table-pagination&gt;<br/><br/>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
+                Selected items:<br />
+                <pre style="height: 350px">{{ selectedItems2 | json }}</pre>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="custom-header">
+
+        <!-- Custom Header/Body -->
+        <div role="tabpanel" class="tab-pane" id="custom-header" style="padding-top: 10px;">
             Custom Header/Body
         </div>
-        <div role="tabpanel" class="tab-pane" id="relationship">
+
+        <!-- RelationShip -->
+        <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
             RelationShip
         </div>
     </div>

@@ -30,10 +30,8 @@
 
                     if ($scope.list) {
                         $scope.$watch("list", function (data) {
-                            console.log("IJ");
                             $scope.allSelected = false;
-                            $scope.selectedItems = [];
-                            selected = [];
+                            var selected = [];
 
                             if (data.length > 0) {
 
@@ -52,6 +50,12 @@
                             }
 
                             $scope.items = data;
+                        });
+
+                        $scope.$on("paginationClicked", function (event, list) {
+                            if (list === $scope.list) {
+                                $scope.selectedItems = [];
+                            }
                         });
                     } else {
                         $scope.items = [];
@@ -313,7 +317,7 @@
             }
         })
 
-        .directive("jayTablePagination", function () {
+        .directive("jayTablePagination", function ($rootScope) {
 
             return {
                 restrict: 'E',
@@ -327,7 +331,6 @@
                     render: "="
                 },
                 controller: function ($scope, $element, $attrs) {
-
                     if (!angular.isDefined($scope.list)) {
                         console.error("Error at 'jayTablePagination' directive. You must provide an attribute called 'list'.");
                         return;
@@ -342,13 +345,13 @@
                     $scope.nextFn = null;
                     $scope.goToNextPage = function () {
                         $scope.currentPage++;
-                        $scope.nextFn().then(emmitScopeChanges);
+                        $scope.nextFn().then(emitScopeChanges);
                     };
 
                     $scope.prevFn = null;
                     $scope.backToPreviousPage = function () {
                         $scope.currentPage--;
-                        $scope.prevFn().then(emmitScopeChanges);
+                        $scope.prevFn().then(emitScopeChanges);
                     }
 
                     $scope.$watch("list", getItems);
@@ -365,9 +368,11 @@
 
                         $scope.nextFn = data.next;
                         $scope.prevFn = data.prev;
+
+                        $rootScope.$broadcast("paginationClicked", $scope.list);
                     }
 
-                    function emmitScopeChanges(data) {
+                    function emitScopeChanges(data) {
                         $scope.$apply(function () {
                             getItems(data);
                             if (angular.isDefined($scope.render)) {
