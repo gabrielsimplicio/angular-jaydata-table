@@ -6,7 +6,9 @@
 .controller("jayTableSample", function ($scope, $data, jayTableOptions) {
     
     $scope.list = [];
+    $scope.list2 = [];
     $scope.selectedItems = [];
+    $scope.selectedItems2 = [];
 
     $data
         .initService("http://localhost:54273/odata")
@@ -14,9 +16,21 @@
 
             odataContext
                 .Person
-                .toArray(function (people) {
+                .toArray()
+                .then(function (people) {
                     $scope.$apply(function () {
                         $scope.list = people;
+                    });
+                });
+
+            odataContext
+                .Person
+                .withCount()
+                .take(10)
+                .toArray()
+                .then(function (people) {
+                    $scope.$apply(function () {
+                        $scope.list2 = people;
                     });
                 });
 
@@ -27,9 +41,9 @@
     
     jayTableOptions
         .initializeHeader()
-        .addColumn("Name").withTitle("Name")
+        .addColumn("Name")
         .addColumn("DateOfBirth").withTitle("Date Of Birth")
-        .addColumn("Phone").withTitle("Phone");
+        .addColumn("Phone")
     
     $scope.options = jayTableOptions;
 

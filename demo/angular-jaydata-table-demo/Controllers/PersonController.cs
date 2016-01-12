@@ -8,6 +8,7 @@ namespace angular_jaydata_table_demo.Controllers
 {
     public class PersonController : ODataController
     {
+        [EnableQuery(PageSize = 10)]
         public IHttpActionResult Get()
         {
             var demoList = new List<Person>();

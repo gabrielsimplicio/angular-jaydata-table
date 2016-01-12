@@ -74,27 +74,25 @@
                         var element = $(event.target);
 
                         if (event.shiftKey) {
-                            //remove a seleção do texto da grid
                             if (window.getSelection()) {
                                 window.getSelection().removeAllRanges();
                             }
 
-                            //Marca todos os elementos entre o recém-selecionado e o já previamente selecionado (caso haja)
                             if (selected.length > 0) {
-                                var indexElemJaSelecionado = $scope.items.indexOf(selected[0]);
-                                var indexElemRecemSelecionado = $scope.items.indexOf(item);
+                                var indexElemAlreadySelected = $scope.items.indexOf(selected[0]);
+                                var indexElemSelectedNow = $scope.items.indexOf(item);
 
-                                var contadorInicial = (indexElemJaSelecionado > indexElemRecemSelecionado) ? indexElemRecemSelecionado : indexElemJaSelecionado;
-                                var contadorFinal = (indexElemJaSelecionado > indexElemRecemSelecionado) ? indexElemJaSelecionado : indexElemRecemSelecionado;
+                                var inicialCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemSelectedNow : indexElemAlreadySelected;
+                                var finalCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemAlreadySelected : indexElemSelectedNow;
 
-                                for (var i = contadorInicial + 1; i < contadorFinal; i++) {
+                                for (var i = inicialCount + 1; i < finalCount; i++) {
                                     $scope.items[i].IsSelected = true;
                                     selected.push($scope.items[i]);
                                 }
                             }
                         } else {
                             var isCheckbox = element.is("input[type=checkbox]");
-                            //Se não for checkbox, seleciona somente a linha atual
+                            //If isn't checkbox, select only the current row
                             if (!event.ctrlKey && !isCheckbox) {
                                 selected = [];
                                 angular.forEach($scope.items, function (item) {
@@ -103,7 +101,7 @@
                             }
                         }
 
-                        //Adiciona o item na lista de itens selecionados
+                        //Add item to selected items list
                         item.IsSelected = !item.IsSelected;
 
                         var index = selected.indexOf(item);
@@ -310,8 +308,8 @@
                 restrict: 'E',
                 template: '<div class="btn-group">' +
                                 '<span style="float:left; margin: 15px 8px 0 0">{{ currentPage }}/{{ numberOfPages }}</span>' +
-                                '<button class="btn btn-default navbar-btn" ng-click="backToPreviousPage()" ng-disabled="currentPage == 1"><i class="icon-arrow-left"></i></button>' +
-                                '<button class="btn btn-default navbar-btn" ng-click="goToNextPage()" ng-disabled="currentPage == numberOfPages"><i class="icon-arrow-right"></i></button>' +
+                                '<button class="btn btn-default navbar-btn" ng-click="backToPreviousPage()" ng-disabled="currentPage == 1"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button>' +
+                                '<button class="btn btn-default navbar-btn" ng-click="goToNextPage()" ng-disabled="currentPage == numberOfPages"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>' +
                             '</div>',
                 scope: {
                     list: "=",
@@ -499,21 +497,21 @@
             }
 
             /*
-                * Opções de uso do "format":
-                * .format(formato)
+                * Options using "format":
+                * .format(form)
                 * 
-                * formato pode ser:
-                *  - uma string: "uppercase", "lowercase", "json";
-                *  - um objeto: 
+                * "form" can be:
+                *  - a string: "uppercase", "lowercase", "json";
+                *  - a object: 
                 * var formatObj = {
                 *      typeFormat: mask
                 * }
                 * 
-                * - Tipos de formato:
-                *  - "date": máscaras: https://docs.angularjs.org/api/ng/filter/date
-                *  - "currency": máscaras: https://docs.angularjs.org/api/ng/filter/currency
+                * - format types:
+                *  - "date": masks: https://docs.angularjs.org/api/ng/filter/date
+                *  - "currency": masks: https://docs.angularjs.org/api/ng/filter/currency
                 * 
-                * Para mais componentes, acesse https://docs.angularjs.org/api/ng/filter
+                * For more components, access https://docs.angularjs.org/api/ng/filter
                 * 
                 */
             function addColumnFormat(columnFormat, columnName) {
