@@ -14,7 +14,8 @@
                 scope: {
                     list: "=",
                     options: "=",
-                    selectedItems: "="
+                    selectedItems: "=",
+                    withoutCheckbox: "@"
                 },
                 controller: function ($scope, $element, $attrs) {
 
@@ -24,6 +25,8 @@
                     if ($scope.options) {
                         $scope.tableOptions = $scope.options.getTableHeader();
                     }
+                    
+                    $scope.withoutCheckbox = angular.isDefined($scope.withoutCheckbox);
 
                     if ($scope.list) {
                         $scope.$watch("list", function (data) {
@@ -66,52 +69,54 @@
                         $scope.selectedItems = selected;
                     }
 
-                    $scope.toggleSelected = function (item, event) {
-                        $scope.allSelected = false;
+                    $scope.toggleSelected = function (item, event, withoutCheckbox) {
+                        if (!withoutCheckbox) {
+                            $scope.allSelected = false;
 
-                        event.stopPropagation();
+                            event.stopPropagation();
 
-                        var element = $(event.target);
+                            var element = $(event.target);
 
-                        if (event.shiftKey) {
-                            if (window.getSelection()) {
-                                window.getSelection().removeAllRanges();
-                            }
+                            if (event.shiftKey) {
+                                if (window.getSelection()) {
+                                    window.getSelection().removeAllRanges();
+                                }
 
-                            if (selected.length > 0) {
-                                var indexElemAlreadySelected = $scope.items.indexOf(selected[0]);
-                                var indexElemSelectedNow = $scope.items.indexOf(item);
+                                if (selected.length > 0) {
+                                    var indexElemAlreadySelected = $scope.items.indexOf(selected[0]);
+                                    var indexElemSelectedNow = $scope.items.indexOf(item);
 
-                                var inicialCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemSelectedNow : indexElemAlreadySelected;
-                                var finalCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemAlreadySelected : indexElemSelectedNow;
+                                    var inicialCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemSelectedNow : indexElemAlreadySelected;
+                                    var finalCount = (indexElemAlreadySelected > indexElemSelectedNow) ? indexElemAlreadySelected : indexElemSelectedNow;
 
-                                for (var i = inicialCount + 1; i < finalCount; i++) {
-                                    $scope.items[i].IsSelected = true;
-                                    selected.push($scope.items[i]);
+                                    for (var i = inicialCount + 1; i < finalCount; i++) {
+                                        $scope.items[i].IsSelected = true;
+                                        selected.push($scope.items[i]);
+                                    }
+                                }
+                            } else {
+                                var isCheckbox = element.is("input[type=checkbox]");
+                                //If isn't checkbox, select only the current row
+                                if (!event.ctrlKey && !isCheckbox) {
+                                    selected = [];
+                                    angular.forEach($scope.items, function (item) {
+                                        item.IsSelected = false;
+                                    });
                                 }
                             }
-                        } else {
-                            var isCheckbox = element.is("input[type=checkbox]");
-                            //If isn't checkbox, select only the current row
-                            if (!event.ctrlKey && !isCheckbox) {
-                                selected = [];
-                                angular.forEach($scope.items, function (item) {
-                                    item.IsSelected = false;
-                                });
+
+                            //Add item to selected items list
+                            item.IsSelected = !item.IsSelected;
+
+                            var index = selected.indexOf(item);
+                            if (item.IsSelected) {
+                                selected.push(item);
+                            } else {
+                                selected.splice(index, 1);
                             }
+
+                            $scope.selectedItems = selected;
                         }
-
-                        //Add item to selected items list
-                        item.IsSelected = !item.IsSelected;
-
-                        var index = selected.indexOf(item);
-                        if (item.IsSelected) {
-                            selected.push(item);
-                        } else {
-                            selected.splice(index, 1);
-                        }
-
-                        $scope.selectedItems = selected;
                     }
 
                     $scope.processColumn = function (item, option) {
@@ -150,7 +155,6 @@
                     return function ($scope) {
 
                         transclude($scope, function (clone) {
-
                             var table = $element.find('table');
 
                             var html;
@@ -214,7 +218,7 @@
                 require: '^jayTable',
                 template: '<thead>' +
                             '<tr script-transclude>' +
-                                '<th ng-if="items" style="width: 8px !important">' +
+                                '<th ng-if="items && !noCheckBox" style="width: 8px !important">' +
                                     '<input type="checkbox" ng-checked="allSelected" ng-click="selectAll()" />' +
                                 '</th>' +
                                 '<th ng-repeat="option in tableOptions">' +
@@ -223,6 +227,8 @@
                             '</tr>' +
                         '</thead>',
                 link: function ($scope, $element, $attrs) {
+                    $scope.noCheckBox = $scope.withoutCheckbox;
+
                     $scope.default = $attrs.default;
                     if (!$scope.default) {
                         $scope.colspan = angular.isDefined($attrs.colspan) ? $attrs.colspan : 0;
@@ -239,19 +245,22 @@
                 transclude: true,
                 require: '^jayTable',
                 template: '<tbody>' +
-                                '<tr ng-if="items.length == 0">' +
-                                    '<td colspan="{{ default ? tableOptions.length + 1 : noContentColspan + 1 }}" style="text-align: center"><i>Não há conteúdo para ser exibido.</i></td>' +
-                                '</tr>' +
-                                '<tr ng-if="default" ng-repeat="item in items" ng-click="toggleSelected(item, $event)" style="cursor: pointer" ng-style="{ \'background-color\': item.IsSelected ? \'#fbebbc\': \'\' }">' +
-                                    '<td>' +
-                                        '<input type="checkbox" ng-checked="item.IsSelected" ng-click="toggleSelected(item, $event)" style="cursor: pointer"/>' +
-                                    '</td>' +
-                                    '<td ng-repeat="option in tableOptions">' +
-                                        '{{ processColumn(item, option) }}' +
-                                    '</td>' +
-                                '</tr>' +
-                                '<tr ng-if="!default" ng-repeat="item in items" ng-click="toggleSelected(item, $event)" style="cursor: pointer" ng-style="{ \'background-color\': item.IsSelected ? \'#fbebbc\': \'\' } " script-transclude></tr>' +
-                            '</tbody>'
+                            '<tr ng-if="items.length == 0">' +
+                                '<td colspan="{{ default ? tableOptions.length + 1 : noContentColspan + 1 }}" style="text-align: center"><i>Não há conteúdo para ser exibido.</i></td>' +
+                            '</tr>' +
+                            '<tr ng-if="default" ng-repeat="item in items" ng-click="toggleSelected(item, $event, noCheckBox)" style="cursor: pointer" ng-style="{ \'background-color\': (!noCheckBox ? (item.IsSelected ? \'#fbebbc\': \'\') : \'\') }">' +
+                                '<td ng-if="!noCheckBox">' +
+                                    '<input type="checkbox" ng-checked="item.IsSelected" ng-click="toggleSelected(item, $event, noCheckBox)" style="cursor: pointer"/>' +
+                                '</td>' +
+                                '<td ng-repeat="option in tableOptions">' +
+                                    '{{ processColumn(item, option) }}' +
+                                '</td>' +
+                            '</tr>' +
+                            '<tr ng-if="!default" ng-repeat="item in items" ng-click="toggleSelected(item, $event, withoutCheckbox)" style="cursor: pointer" ng-style="{ \'background-color\': (!noCheckBox ? (item.IsSelected ? \'#fbebbc\': \'\') : \'\') }" script-transclude></tr>' +
+                        '</tbody>',
+                link: function ($scope, $element, $attrs) {
+                    $scope.noCheckBox = $scope.withoutCheckbox;
+                }
             }
         })
 

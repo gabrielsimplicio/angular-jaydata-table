@@ -49,10 +49,10 @@
         <div role="tabpanel" class="tab-pane active" id="basic">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         CODE:
                         <pre><code>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
                         Selected items:<br />
@@ -62,18 +62,28 @@
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="without-checkboxes">
-            Without Checkboxes
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <jay-table list="list" options="options" without-checkbox></jay-table>
+                    </div>
+                    <div class="col-md-6">
+                        CODE:
+                        <pre><code>&lt;jay-table list="list" options="options" without-checkbox&gt;&lt;/jay-table&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="pagination">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <jay-table-pagination list="list2"></jay-table-pagination>
                         <jay-table list="list2" options="options" selected-items="selectedItems2"></jay-table>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         CODE:
-                        <pre><code>&lt;jay-table list="list2" options="options" selected-items="selectedItems2"&gt;&lt;/jay-table&gt;</code></pre>
+                        <pre><code>&lt;jay-table-pagination list="list"&gt;&lt;/jay-table-pagination&gt;<br/><br/>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
                         Selected items:<br />
                         <pre style="height: 350px">{{ selectedItems2 | json }}</pre>
                     </div>
