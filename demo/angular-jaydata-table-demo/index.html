@@ -100,11 +100,28 @@ $scope.options = jayTableOptions;</code></pre>
                         <pre style="height: 250px"><code>&lt;jay-table list="list" options="options" without-checkboxes&gt;&lt;/jay-table&gt;</code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="js02">
-                        <pre style="height: 250px"><code>jayTableOptions
+                        <pre style="height: 250px"><code>$scope.list = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext
+            .Person
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    });
+
+jayTableOptions
     .initializeHeader()
     .addColumn("Name")
     .addColumn("DateOfBirth").withTitle("Date Of Birth")
-    .addColumn("Phone")</code></pre>
+    .addColumn("Phone")
+
+$scope.options = jayTableOptions;</code></pre>
                     </div>
                 </div>
             </div>
@@ -130,11 +147,31 @@ $scope.options = jayTableOptions;</code></pre>
 &lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="js03">
-                        <pre style="height: 250px"><code>jayTableOptions
+                        <pre style="height: 250px"><code>$scope.list = [];
+$scope.selectedItems = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext
+            .Person
+            <b>.withCount()
+            .take(10)</b>
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    })
+
+jayTableOptions
     .initializeHeader()
     .addColumn("Name")
     .addColumn("DateOfBirth").withTitle("Date Of Birth")
-    .addColumn("Phone")</code></pre>
+    .addColumn("Phone")
+
+$scope.options = jayTableOptions;</code></pre>
                     </div>
                 </div>
                 Selected items:<br />
@@ -170,21 +207,35 @@ $scope.options = jayTableOptions;</code></pre>
                     <div role="tabpanel" class="tab-pane active" id="html04">
                         <pre style="height: 250px"><code ng-non-bindable>&lt;jay-table list="list" selected-items="selectedItems"&gt;
     &lt;jay-table-head&gt;
-        &lt;script type="text/html"&gt;
+        <b>&lt;script type="text/html"&gt;</b>
             &lt;th&gt;Name&lt;/th&gt;
             &lt;th&gt;Date Of Birth&lt;/th&gt;
-        &lt;/script&gt;
+        <b>&lt;/script&gt;</b>
     &lt;/jay-table-head&gt;
     &lt;jay-table-body&gt;
-        &lt;script type="text/html"&gt;
+        <b>&lt;script type="text/html"&gt;</b>
             &lt;td&gt;{{item.Nome}}&lt;/td&gt;
             &lt;td&gt;{{item.DateOfBirth}}&lt;/td&gt;
-        &lt;/script&gt;
+        <b>&lt;/script&gt;</b>
     &lt;/jay-table-body&gt;
 &lt;/jay-table&gt;</code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="js04">
-                        <pre style="height: 250px"><code></code></pre>
+                        <pre style="height: 250px"><code>$scope.list = [];
+$scope.selectedItems = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext
+            .Person
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    })</code></pre>
                     </div>
                 </div>
                 Selected items:<br />
@@ -193,11 +244,6 @@ $scope.options = jayTableOptions;</code></pre>
         </div>
 
         <!-- Relationship -->
-        <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
-            RelationShip
-        </div>
-
-        <!-- RelationShip -->
         <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
             RelationShip
         </div>

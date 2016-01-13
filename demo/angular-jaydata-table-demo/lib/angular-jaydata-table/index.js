@@ -517,11 +517,12 @@
                 * .format(form)
                 * 
                 * "form" can be:
-                *  - a string: "uppercase", "lowercase", "json";
-                *  - a object: 
-                * var formatObj = {
-                *      typeFormat: mask
-                * }
+                *  - string: 
+                *           "uppercase", "lowercase", "json";
+                *  - object: 
+                *           var formatObj = {
+                *               typeFormat: mask
+                *           }
                 * 
                 * - format types:
                 *  - "date": masks: https://docs.angularjs.org/api/ng/filter/date
