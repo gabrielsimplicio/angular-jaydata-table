@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("BasicController", function ($scope, $data, jayTableOptions) {
+    JayDataDemoApp.controller("RelationshipController", function ($scope, $data, jayTableOptions) {
 
         $scope.list = [];
         $scope.selectedItems = [];
@@ -11,7 +11,8 @@
             .then(function (odataContext) {
 
                 odataContext
-                    .School
+                    .Person
+                    .include("School")
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
@@ -26,7 +27,7 @@
         jayTableOptions
             .initializeHeader()
             .addColumn("Name")
-            .addColumn("Address")
+            .addColumn("School.Name").withTitle("School")
 
         $scope.options = jayTableOptions;
     });

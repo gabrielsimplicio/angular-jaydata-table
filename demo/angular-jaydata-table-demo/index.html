@@ -60,7 +60,7 @@ $data //Jaydata service
     .initService(url)
     .then(function (odataContext) {
         odataContext
-            .Person
+            .School
             .toArray()
             .then(function (people) {
                 $scope.$apply(function () {
@@ -72,8 +72,7 @@ $data //Jaydata service
 jayTableOptions
     .initializeHeader()
     .addColumn("Name")
-    .addColumn("DateOfBirth").withTitle("Date Of Birth")
-    .addColumn("Phone")
+    .addColumn("Address")
 
 $scope.options = jayTableOptions;</code></pre>
                     </div>
@@ -106,7 +105,7 @@ $data //Jaydata service
     .initService(url)
     .then(function (odataContext) {
         odataContext
-            .Person
+            .School
             .toArray()
             .then(function (people) {
                 $scope.$apply(function () {
@@ -118,8 +117,7 @@ $data //Jaydata service
 jayTableOptions
     .initializeHeader()
     .addColumn("Name")
-    .addColumn("DateOfBirth").withTitle("Date Of Birth")
-    .addColumn("Phone")
+    .addColumn("Address")
 
 $scope.options = jayTableOptions;</code></pre>
                     </div>
@@ -244,8 +242,51 @@ $data //Jaydata service
         </div>
 
         <!-- Relationship -->
-        <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;">
-            RelationShip
+        <div role="tabpanel" class="tab-pane" id="relationship" style="padding-top: 10px;" ng-controller="RelationshipController">
+
+            <div class="col-md-6">
+                <jay-table list="list" options="options" selected-items="selectedItems"></jay-table>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html05" aria-controls="html05" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js05" aria-controls="js05" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html05">
+                        <pre style="height: 250px"><code>&lt;jay-table list="list" options="options" selected-items="selectedItems"&gt;&lt;/jay-table&gt;</code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="js05">
+                        <pre style="height: 250px"><code>$scope.list = [];
+$scope.selectedItems = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext                                                       
+            .Person
+            <b>.include("School")</b>
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    });
+
+jayTableOptions
+    .initializeHeader()
+    .addColumn("Name")                                                       
+    <b>.addColumn("School.Name").withTitle("School")</b>
+
+$scope.options = jayTableOptions;</code></pre>
+                    </div>
+                </div>
+
+                Selected items:<br />
+                <pre style="height: 250px">{{ selectedItems | json }}</pre>
+            </div>
         </div>
 
         <!-- Concat columns via HTML -->
@@ -284,5 +325,6 @@ $data //Jaydata service
     <script src="app/BasicController.js"></script>
     <script src="app/PaginationController.js"></script>
     <script src="app/CustomHeaderBodyController.js"></script>
+    <script src="app/RelationshipController.js"></script>
 </body>
 </html>

@@ -106,6 +106,7 @@
     <Content Include="app\BasicController.js" />
     <Content Include="app\CustomHeaderBodyController.js" />
     <Content Include="app\PaginationController.js" />
+    <Content Include="app\RelationshipController.js" />
     <Content Include="lib\angular-jaydata-table\index.js" />
     <Content Include="lib\angular-jaydata-table\table.html" />
     <Content Include="lib\jaydata\angular.min.js" />
@@ -131,10 +132,14 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\City.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\School.cs" />
+    <Compile Include="Model\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

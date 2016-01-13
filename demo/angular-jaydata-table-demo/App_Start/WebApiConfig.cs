@@ -33,6 +33,9 @@ namespace angular_jaydata_table_demo
             ODataModelBuilder builder = new ODataConventionModelBuilder();
 
             builder.EntitySet<Person>("Person");
+            builder.EntitySet<School>("School");
+            builder.EntitySet<City>("City");
+            builder.EntitySet<State>("State");
 
             return builder.GetEdmModel();
         }
