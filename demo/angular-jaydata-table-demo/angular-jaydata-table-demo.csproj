@@ -107,6 +107,7 @@
     <Content Include="app\ConcatColumnsHTMLController.js" />
     <Content Include="app\ConcatColumnsJavascriptController.js" />
     <Content Include="app\CustomHeaderBodyController.js" />
+    <Content Include="app\FormatController.js" />
     <Content Include="app\PaginationController.js" />
     <Content Include="app\RelationshipController.js" />
     <Content Include="lib\angular-jaydata-table\index.js" />

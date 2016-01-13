@@ -421,6 +421,14 @@
                     withTitle: function (columnTitle) {
                         return fnWithTitle(columnTitle, columnName);
                     },
+                    format: function (columnFormat) {
+                        addColumnFormat(columnFormat, columnName);
+
+                        return {
+                            addColumn: fnAddColumn,
+                            addColumns: fnAddColumns
+                        }
+                    },
                     addColumns: fnAddColumns
                 }
             }
@@ -514,24 +522,24 @@
             }
 
             /*
-                * Options using "format":
-                * .format(form)
-                * 
-                * "form" can be:
-                *  - string: 
-                *           "uppercase", "lowercase", "json";
-                *  - object: 
-                *           var formatObj = {
-                *               typeFormat: mask
-                *           }
-                * 
-                * - format types:
-                *  - "date": masks: https://docs.angularjs.org/api/ng/filter/date
-                *  - "currency": masks: https://docs.angularjs.org/api/ng/filter/currency
-                * 
-                * For more components, access https://docs.angularjs.org/api/ng/filter
-                * 
-                */
+            * Options using "format":
+            * .format(form)
+            * 
+            * "form" can be:
+            *  - string: 
+            *           "uppercase", "lowercase", "json";
+            *  - object: 
+            *           var formatObj = {
+            *               typeFormat: mask
+            *           }
+            * 
+            * - format types:
+            *  - "date": masks: https://docs.angularjs.org/api/ng/filter/date
+            *  - "currency": masks: https://docs.angularjs.org/api/ng/filter/currency
+            * 
+            * For more components, access https://docs.angularjs.org/api/ng/filter
+            * 
+            */
             function addColumnFormat(columnFormat, columnName) {
                 angular.forEach(tableHeader, function (option) {
                     if (option.column == columnName) {
