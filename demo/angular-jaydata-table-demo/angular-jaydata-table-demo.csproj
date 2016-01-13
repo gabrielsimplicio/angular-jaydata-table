@@ -110,8 +110,6 @@
     <Content Include="app\FormatController.js" />
     <Content Include="app\PaginationController.js" />
     <Content Include="app\RelationshipController.js" />
-    <Content Include="lib\angular-jaydata-table\index.js" />
-    <Content Include="lib\angular-jaydata-table\table.html" />
     <Content Include="lib\jaydata\angular.min.js" />
     <Content Include="lib\jaydata\jaydata.min.js" />
     <Content Include="lib\jaydata\oDataProvider.min.js" />
@@ -156,7 +154,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54273</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
