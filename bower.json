@@ -1,0 +1,28 @@
+{
+  "name": "angular-jaydata-table",
+  "homepage": "https://github.com/gabrielsimplicio/angular-jaydata-table",
+  "authors": [
+    "Gabriel Simplício <gsimdias@gmail.com>"
+  ],
+  "description": "AngularJS directive for those using HTML tables and jaydata.",
+  "main": "angular.jaydata.table.js",
+  "moduleType": [],
+  "keywords": [
+    "angular",
+    "jaydata",
+    "table"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  }
+}
