@@ -11,8 +11,5 @@ namespace angular_jaydata_table_demo.Model
         [Key]
         public int IDCity { get; set; }
         public string Name { get; set; }
-
-        public int IDState { get; set; }
-        public State State { get; set; }
     }
 }

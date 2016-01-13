@@ -31,7 +31,7 @@ namespace angular_jaydata_table_demo.Controllers
                     IDSchool = i,
                     Name = "School " + i,
                     Address = "Address " + i,
-                    IDCity = citiesList[index].IDState,
+                    IDCity = citiesList[index].IDCity,
                     City = citiesList[index]
                 });
             }
@@ -39,37 +39,16 @@ namespace angular_jaydata_table_demo.Controllers
             return schoolsList;
         }
 
-        private List<State> GetStates()
-        {
-            var statesList = new List<State>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                statesList.Add(new State()
-                {
-                    IDState = i,
-                    Name = "State " + i
-                });
-            }
-
-            return statesList;
-        }
-
         private List<City> GetCities()
         {
             var citiesList = new List<City>();
-            var statesList = GetStates();
-            var r = new Random();
 
             for (int i = 0; i < 5; i++)
             {
-                var index = r.Next(4);
                 citiesList.Add(new City()
                 {
                     IDCity = i,
-                    Name = "City " + i,
-                    IDState = statesList[index].IDState,
-                    State = statesList[index]
+                    Name = "City " + i
                 });
             }
 

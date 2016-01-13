@@ -35,7 +35,6 @@ namespace angular_jaydata_table_demo
             builder.EntitySet<Person>("Person");
             builder.EntitySet<School>("School");
             builder.EntitySet<City>("City");
-            builder.EntitySet<State>("State");
 
             return builder.GetEdmModel();
         }

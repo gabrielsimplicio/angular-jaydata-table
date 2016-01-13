@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\BasicController.js" />
+    <Content Include="app\ConcatColumnsHTMLController.js" />
     <Content Include="app\CustomHeaderBodyController.js" />
     <Content Include="app\PaginationController.js" />
     <Content Include="app\RelationshipController.js" />
@@ -139,7 +140,6 @@
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\School.cs" />
-    <Compile Include="Model\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
