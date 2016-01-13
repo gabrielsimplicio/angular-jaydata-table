@@ -1,0 +1,24 @@
+{
+  "name": "angular-jaydata-table",
+  "version": "1.0.0",
+  "description": "AngularJS directive for those using HTML tables and jaydata.",
+  "main": "angular.jaydata.table.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielsimplicio/angular-jaydata-table.git"
+  },
+  "keywords": [
+    "angular",
+    "jaydata",
+    "table"
+  ],
+  "author": "Gabriel Simplício (gsimdias@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielsimplicio/angular-jaydata-table/issues"
+  },
+  "homepage": "https://github.com/gabrielsimplicio/angular-jaydata-table#readme"
+}
