@@ -411,8 +411,71 @@ $scope.options = jayTableOptions;</code></pre>
         </div>
 
         <!-- Colspan -->
-        <div role="tabpanel" class="tab-pane" id="colspan" style="padding-top: 10px;">
-            Colspan
+        <div role="tabpanel" class="tab-pane" id="colspan" style="padding-top: 10px;" ng-controller="ConcatColumnsHTMLController">
+            <div class="col-md-6">
+                <jay-table list="list" selected-items="selectedItems">
+                    <jay-table-head>
+                        <script type="text/html">
+                            <th>Name</th>
+                            <th colspan="2">Address/City</th>
+                        </script>
+                    </jay-table-head>
+                    <jay-table-body>
+                        <script type="text/html">
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Address}}</td>
+                            <td>{{item.City.Name}}</td>
+                        </script>
+                    </jay-table-body>
+                </jay-table>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#html08" aria-controls="html08" role="tab" data-toggle="tab">HTML</a></li>
+                    <li role="presentation"><a href="#js08" aria-controls="js08" role="tab" data-toggle="tab">Javascript</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="html08">
+                        <pre style="height: 250px"><code ng-non-bindable>&lt;jay-table list="list" selected-items="selectedItems"&gt;
+    &lt;jay-table-head&gt;
+        &lt;script type="text/html"&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th <b>colspan="2"</b>&gt;Address/City&lt;/th&gt;
+        &lt;/script&gt;
+    &lt;/jay-table-head&gt;
+    &lt;jay-table-body&gt;
+        &lt;script type="text/html"&gt;
+            &lt;td&gt;{{item.Name}}&lt;/td&gt;
+            <b>&lt;td&gt;{{item.Address}}&lt;/td&gt;
+            &lt;td&gt;{{item.City.Name}}&lt;/td&gt;</b>
+        &lt;/script&gt;
+    &lt;/jay-table-body&gt;
+&lt;/jay-table&gt;</code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="js08">
+                        <pre style="height: 250px"><code>$scope.list = [];
+$scope.selectedItems = [];
+
+$data //Jaydata service
+    .initService(url)
+    .then(function (odataContext) {
+        odataContext
+            .School
+            .include("City")
+            .toArray()
+            .then(function (people) {
+                $scope.$apply(function () {
+                    $scope.list = people;
+                });
+            });
+    });</code></pre>
+                    </div>
+                </div>
+
+                Selected items:<br />
+                <pre style="height: 250px">{{ selectedItems | json }}</pre>
+            </div>
         </div>
 
         <!-- Format -->
