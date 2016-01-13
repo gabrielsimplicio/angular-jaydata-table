@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("CustomHeaderBodyController", function ($scope, $data, jayTableOptions) {
+    JayDataDemoApp.controller("CustomHeaderBodyController", function ($scope, $data) {
 
         $scope.list = [];
         $scope.selectedItems = [];

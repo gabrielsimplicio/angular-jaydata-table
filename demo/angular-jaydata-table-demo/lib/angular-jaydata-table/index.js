@@ -399,7 +399,8 @@
             function initializeHeader() {
                 tableHeader = [];
                 return {
-                    addColumn: fnAddColumn
+                    addColumn: fnAddColumn,
+                    addColumns: fnAddColumns
                 }
             }
 

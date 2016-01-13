@@ -105,6 +105,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\BasicController.js" />
     <Content Include="app\ConcatColumnsHTMLController.js" />
+    <Content Include="app\ConcatColumnsJavascriptController.js" />
     <Content Include="app\CustomHeaderBodyController.js" />
     <Content Include="app\PaginationController.js" />
     <Content Include="app\RelationshipController.js" />
