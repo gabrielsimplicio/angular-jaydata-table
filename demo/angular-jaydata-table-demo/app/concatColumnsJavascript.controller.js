@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
+    
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
-    JayDataDemoApp.controller("PaginationController", function ($scope, $data, jayTableOptions) {
-
+    JayDataDemoApp.controller("ConcatColumnsJavascriptController", concatColumnsJavascriptController);
+    
+    function concatColumnsJavascriptController($scope, $data, jayTableOptions) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -11,16 +14,14 @@
             .then(function (odataContext) {
 
                 odataContext
-                    .Person
-                    .withCount()
-                    .take(10)
+                    .School
+                    .include("City")
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
                             $scope.list = people;
                         });
                     });
-
             })
             .fail(function (error) {
                 console.log(error);
@@ -29,9 +30,15 @@
         jayTableOptions
             .initializeHeader()
             .addColumn("Name")
-            .addColumn("DateOfBirth").withTitle("Date Of Birth")
-            .addColumn("Phone")
+            .addColumns()
+                .withTitle("Address/City")
+                .like(function () {
+                    return this.Address + "/" + this.City;
+                })
+                .add("Address").as("Address")
+                .add("City.Name").as("City")
 
         $scope.options = jayTableOptions;
-    });
+    }
+
 })();

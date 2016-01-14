@@ -5,7 +5,7 @@
     "Gabriel Simplício <gsimdias@gmail.com>"
   ],
   "description": "AngularJS directive for those using HTML tables and jaydata.",
-  "main": "angular.jaydata.table.js",
+  "main": "dist/angular.jaydata.table.js",
   "moduleType": [],
   "keywords": [
     "angular",
