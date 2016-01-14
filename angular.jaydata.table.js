@@ -252,7 +252,7 @@
                 require: '^jayTable',
                 template: '<tbody>' +
                             '<tr ng-if="items.length == 0">' +
-                                '<td colspan="{{ default ? tableOptions.length + 1 : noContentColspan + 1 }}" style="text-align: center"><i>Não há conteúdo para ser exibido.</i></td>' +
+                                '<td colspan="{{ default ? tableOptions.length + 1 : noContentColspan + 1 }}" style="text-align: center"><i>Empty table</i></td>' +
                             '</tr>' +
                             '<tr ng-if="default" ng-repeat="item in items" ng-click="toggleSelected(item, $event, noCheckBox)" style="cursor: pointer" ng-style="{ \'background-color\': (!noCheckBox ? (item.IsSelected ? \'#fbebbc\': \'\') : \'\') }">' +
                                 '<td ng-if="!noCheckBox">' +
