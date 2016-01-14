@@ -7,7 +7,7 @@
         $scope.selectedItems = [];
 
         $data
-            .initService("http://localhost:54273/odata")
+            .initService("http://angular-jaydata-table.azurewebsites.net/odata")
             .then(function (odataContext) {
 
                 odataContext

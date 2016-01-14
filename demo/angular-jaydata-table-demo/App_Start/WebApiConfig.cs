@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
 
@@ -26,6 +27,8 @@ namespace angular_jaydata_table_demo
                 "odata",
                 model: GetModel()
             );
+
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
         }
 
         private static IEdmModel GetModel()
