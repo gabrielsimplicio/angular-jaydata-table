@@ -5,7 +5,7 @@ AngularJS directive for those using HTML tables and jaydata.
 
 # Demo
 
-Do you want to see directives in action? Visit http://gabrielsimplicio.github.io/angular-jaydata-table/!
+Do you want to see directive in action? Visit http://gabrielsimplicio.github.io/angular-jaydata-table/!
 
 # Installation
 
