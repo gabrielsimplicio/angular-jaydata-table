@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("FormatController", function ($scope, $data, jayTableOptions) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
+    JayDataDemoApp.controller("FormatController", formatController);
+
+    function formatController($scope, $data, jayTableOptions) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -33,5 +36,6 @@
             .addColumn("DateOfBirth").withTitle("Date Of Birth").format(dateFormat)
 
         $scope.options = jayTableOptions;
-    });
+    }
+
 })();

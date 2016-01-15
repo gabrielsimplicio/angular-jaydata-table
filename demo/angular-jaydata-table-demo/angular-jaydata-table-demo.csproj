@@ -102,22 +102,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.js" />
-    <Content Include="app\BasicController.js" />
-    <Content Include="app\ConcatColumnsHTMLController.js" />
-    <Content Include="app\ConcatColumnsJavascriptController.js" />
-    <Content Include="app\CustomHeaderBodyController.js" />
-    <Content Include="app\FormatController.js" />
-    <Content Include="app\PaginationController.js" />
-    <Content Include="app\RelationshipController.js" />
+    <Content Include="app\app.module.js" />
+    <Content Include="app\basic.controller.js" />
+    <Content Include="app\concatColumnsHTML.controller.js" />
+    <Content Include="app\concatColumnsJavascript.controller.js" />
+    <Content Include="app\customHeaderBody.controller.js" />
+    <Content Include="app\format.controller.js" />
+    <Content Include="app\pagination.controller.js" />
+    <Content Include="app\relationship.controller.js" />
     <Content Include="lib\jaydata\angular.min.js" />
     <Content Include="lib\jaydata\jaydata.min.js" />
     <Content Include="lib\jaydata\oDataProvider.min.js" />
     <Content Include="lib\olingo-odata4-js\odatajs-4.0.0.min.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
-    <Content Include="README.md" />
     <Content Include="package.json" />
+    <Content Include="app\app.config.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

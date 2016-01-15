@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("CustomHeaderBodyController", function ($scope, $data) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
+    JayDataDemoApp.controller("BasicController", basicController);
+
+    function basicController($scope, $data, jayTableOptions) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -11,7 +14,7 @@
             .then(function (odataContext) {
 
                 odataContext
-                    .Person
+                    .School
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
@@ -22,5 +25,13 @@
             .fail(function (error) {
                 console.log(error);
             });
-    });
+
+        jayTableOptions
+            .initializeHeader()
+            .addColumn("Name")
+            .addColumn("Address")
+
+        $scope.options = jayTableOptions;
+    }
+
 })();

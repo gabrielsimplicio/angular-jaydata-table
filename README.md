@@ -51,8 +51,18 @@ MyApp.controller("MyController", function ($scope, $data, jayTableOptions) {
 });
 ```
 
+#### Optional Config
+
+Set default empty table text, if you prefer.
+
+```js
+MyApp.config(function (jayTableConfigProvider) {
+    jayTableConfigProvider.setEmptyText('This table is empty!');
+});
+```
+
 # Demo
 
 Take a look at [directive in action](http://gabrielsimplicio.github.io/angular-jaydata-table/) and [demo project](https://github.com/gabrielsimplicio/angular-jaydata-table/tree/master/demo) to see more options.
 
-## Enjoy it! ;)
+#### Enjoy it! ;)

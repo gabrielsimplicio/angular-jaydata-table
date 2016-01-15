@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("RelationshipController", function ($scope, $data, jayTableOptions) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
+    JayDataDemoApp.controller("ConcatColumnsHTMLController", concatColumnsHTMLController);
+    
+    function concatColumnsHTMLController($scope, $data) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -11,8 +14,8 @@
             .then(function (odataContext) {
 
                 odataContext
-                    .Person
-                    .include("School")
+                    .School
+                    .include("City")
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
@@ -23,12 +26,6 @@
             .fail(function (error) {
                 console.log(error);
             });
+    }
 
-        jayTableOptions
-            .initializeHeader()
-            .addColumn("Name")
-            .addColumn("School.Name").withTitle("School")
-
-        $scope.options = jayTableOptions;
-    });
 })();
