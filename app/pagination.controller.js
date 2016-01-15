@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("PaginationController", function ($scope, $data, jayTableOptions) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
+    JayDataDemoApp.controller("PaginationController", paginationController);
+
+    function paginationController($scope, $data, jayTableOptions) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -33,5 +36,6 @@
             .addColumn("Phone")
 
         $scope.options = jayTableOptions;
-    });
+    }
+
 })();

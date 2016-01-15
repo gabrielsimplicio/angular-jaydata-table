@@ -1,7 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("FormatController", function ($scope, $data, jayTableOptions) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
+
+    JayDataDemoApp.controller("RelationshipController", relationshipController);
+
+    function relationshipController($scope, $data, jayTableOptions) {
 
         $scope.list = [];
         $scope.selectedItems = [];
@@ -12,6 +16,7 @@
 
                 odataContext
                     .Person
+                    .include("School")
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
@@ -22,16 +27,13 @@
             .fail(function (error) {
                 console.log(error);
             });
-        
-        var dateFormat = {
-            date: "dd/MM/yyyy"
-        }
 
         jayTableOptions
             .initializeHeader()
-            .addColumn("Name").format("uppercase")
-            .addColumn("DateOfBirth").withTitle("Date Of Birth").format(dateFormat)
+            .addColumn("Name")
+            .addColumn("School.Name").withTitle("School")
 
         $scope.options = jayTableOptions;
-    });
+    }
+
 })();

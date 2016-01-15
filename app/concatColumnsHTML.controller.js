@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    JayDataDemoApp.controller("CustomHeaderBodyController", function ($scope, $data) {
+    var JayDataDemoApp = angular.module("jayDataDemoApp");
 
+    JayDataDemoApp.controller("ConcatColumnsHTMLController", concatColumnsHTMLController);
+    
+    function concatColumnsHTMLController($scope, $data) {
         $scope.list = [];
         $scope.selectedItems = [];
 
@@ -11,7 +14,8 @@
             .then(function (odataContext) {
 
                 odataContext
-                    .Person
+                    .School
+                    .include("City")
                     .toArray()
                     .then(function (people) {
                         $scope.$apply(function () {
@@ -22,5 +26,6 @@
             .fail(function (error) {
                 console.log(error);
             });
-    });
+    }
+
 })();
